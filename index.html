@@ -182,64 +182,76 @@ const products = [
       prevBtn.disabled = currentPage === 1;
       prevBtn.onclick = () => { currentPage--; update(); };
 
-      const nextBtn = document.createElement("button");
-      nextBtn.textContent = "التالي";
-      nextBtn.disabled = currentPage === totalPages;
-      nextBtn.onclick = () => { currentPage++; update(); };
+    const nextBtn = document.createElement("button");
+    nextBtn.textContent = "التالي";
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.onclick = () => { currentPage++; update(); };
 
-      container.appendChild(prevBtn);
-      container.appendChild(nextBtn);
-    }
+    // إضافة الأزرار
+    container.appendChild(prevBtn);
 
-    function updateTotalPrice() {
-      let total = 0;
-      for (const p of products) {
-        const qty = parseInt(quantities[p.id]);
-        if (qty && qty > 0) {
-          total += qty * p.price;
+    // إضافة ترقيم الصفحات
+    for (let i = 1; i <= totalPages; i++) {
+        const pageBtn = document.createElement("button");
+        pageBtn.textContent = i;
+        pageBtn.onclick = () => { currentPage = i; update(); };
+     if (i === currentPage) {
+            pageBtn.style.backgroundColor = "lightgreen";
         }
+        container.appendChild(pageBtn);
+    }
+
+    container.appendChild(nextBtn);
+  }
+
+  function update() {
+    displayProducts(currentPage);
+    updatePagination();
+  }
+
+  function updateTotalPrice() {
+    let total = 0;
+    for (const id in quantities) {
+      const qty = parseInt(quantities[id]) || 0;
+      const product = products.find(p => p.id == id);
+      if (product) {
+        total += qty * product.price;
       }
-      document.getElementById("totalPrice").textContent = `المبلغ الإجمالي: ${total} دج`;
+    }
+    document.getElementById("totalPrice").textContent = `المبلغ الإجمالي: ${total} دج`;
+  }
+
+  function sendOrder() {
+    const note = document.getElementById("note").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+
+    if (!address || !phone) {
+      alert("يرجى إدخال العنوان ورقم الهاتف.");
+      return;
     }
 
-    function sendOrder() {
-      const note = document.getElementById("note").value.trim();
-      const address = document.getElementById("address").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-
-      if (!address || !phone) {
-        alert("يرجى ملء العنوان ورقم الهاتف.");
-        return;
+    let message = `طلب جديد:\n`;
+    for (const id in quantities) {
+      const qty = parseInt(quantities[id]);
+      if (qty > 0) {
+        const product = products.find(p => p.id == id);
+        message += `- ${product.name} × ${qty} = ${qty * product.price} دج\n`;
       }
-
-      let message = "*طلب جديد من المتجر:*\n";
-      let totalPrice = 0;
-
-      products.forEach(p => {
-        const qty = parseInt(quantities[p.id]);
-        if (qty && qty > 0) {
-          const productTotal = qty * p.price;
-          totalPrice += productTotal;
-          message += `- ${p.name}: ${qty} علبة (×${p.pack}) - ${p.price} دج/علبة = ${productTotal} دج\n`;
-        }
-      });
-
-      message += `\n*المبلغ الإجمالي:* ${totalPrice} دج\n`;
-      message += `*العنوان:* ${address}\n*رقم الهاتف:* ${phone}`;
-      if (note) message += `\n*ملاحظة:* ${note}`;
-
-      const encodedMessage = encodeURIComponent(message);
-      const url = `https://wa.me/${phoneNumber.replace("+", "")}?text=${encodedMessage}`;
-      window.open(url, '_blank');
     }
 
-    function update() {
-      displayProducts(currentPage);
-      updatePagination();
+    message += `\nالمجموع: ${document.getElementById("totalPrice").textContent.replace("المبلغ الإجمالي: ", "")}`;
+    message += `\nالعنوان: ${address}\nرقم الهاتف: ${phone}`;
+    if (note) {
+      message += `\nملاحظة: ${note}`;
     }
 
-    update();
-  </script>
+    const encodedMsg = encodeURIComponent(message);
+    window.open(`https://wa.me/${phoneNumber}?text=${encodedMsg}`, "_blank");
+  }
 
+  // أول تحميل
+  update();
+</script>
 </body>
 </html>
