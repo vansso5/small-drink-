@@ -182,26 +182,42 @@ const products = [
       prevBtn.disabled = currentPage === 1;
       prevBtn.onclick = () => { currentPage--; update(); };
 
-    const nextBtn = document.createElement("button");
-    nextBtn.textContent = "التالي";
-    nextBtn.disabled = currentPage === totalPages;
-    nextBtn.onclick = () => { currentPage++; update(); };
+const nextBtn = document.createElement("button");
+nextBtn.textContent = "التالي";
+nextBtn.disabled = currentPage === totalPages;
+nextBtn.onclick = () => { currentPage++; update(); };
 
-    // إضافة الأزرار
-    container.appendChild(prevBtn);
+// إضافة الأزرار
+container.appendChild(prevBtn);
 
-    // إضافة ترقيم الصفحات
-    for (let i = 1; i <= totalPages; i++) {
-        const pageBtn = document.createElement("button");
-        pageBtn.textContent = i;
-        pageBtn.onclick = () => { currentPage = i; update(); };
-     if (i === currentPage) {
-            pageBtn.style.backgroundColor = "lightgreen";
-        }
-        container.appendChild(pageBtn);
+// إضافة ترقيم الصفحات مع إخفاء الأرقام البعيدة
+for (let i = 1; i <= totalPages; i++) {
+  if (
+    i === 1 ||
+    i === totalPages ||
+    (i >= currentPage - 1 && i <= currentPage + 1)
+  ) {
+    const pageBtn = document.createElement("button");
+    pageBtn.textContent = i;
+    pageBtn.onclick = () => {
+      currentPage = i;
+      update();
+    };
+    if (i === currentPage) {
+      pageBtn.style.backgroundColor = "lightgreen";
     }
+    container.appendChild(pageBtn);
+  } else if (
+    (i === 2 && currentPage > 3) ||
+    (i === totalPages - 1 && currentPage < totalPages - 2)
+  ) {
+    const dots = document.createElement("span");
+    dots.textContent = "...";
+    container.appendChild(dots);
+  }
+}
 
-    container.appendChild(nextBtn);
+container.appendChild(nextBtn);
   }
 
   function update() {
