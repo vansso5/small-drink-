@@ -15,7 +15,7 @@
 
 .store-header {
   font-size: 18px;
-  border: 2px solid seagreen;
+  border: 2px solid green;
   border-radius: 12px;
   padding: 10px 15px;
   margin: 20px auto;
@@ -228,7 +228,7 @@
     const products = [
   { id: 1, name: "ariaf 0.5 L", price: 185, pack: 12, img: "https://i.postimg.cc/vTFRv1Bk/images-17.jpg" },
   { id: 2, name: "azro pack 6", price: 440, pack: 6, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGjgTUnWV8twl-jINHkTu6EJeprxEO0AICLZ-1ci95ak5Rtwhw0ZkEe0_z&s=10" },
-  { id: 3, name: "bifa daily 20 cl", price: 520, pack: 30, img: "https://i.postimg.cc/GpXhzjwN/4225.jpg" },
+  { id: 3, name: "bifa 20 cl", price: 520, pack: 30, img: "https://i.postimg.cc/GpXhzjwN/4225.jpg" },
   { id: 4, name: "bifa joy 12.5 cl", price: 430, pack: 48, img: "https://i.postimg.cc/K8FMHQwv/144230829095747170.jpg" },
   { id: 5, name: "candia 12.5 cl", price: 560, pack: 18, img: "https://i.postimg.cc/Prvyj6SW/Candia-Candy-Choco-125-ML.jpg" },
   { id: 6, name: "candia 20 cl", price: 820, pack: 18, img: "https://i.postimg.cc/kX215Mgt/images-18.jpg" },
@@ -273,151 +273,143 @@
   { id: 45, name: "rouiba excellence 25 cl", price: 660, pack: 12, img: "https://i.postimg.cc/wTry8sLc/Rouiba-Excellences-100-Naturel-0-25-L.jpg" }
     ];
 
-    const productsPerPage = 16;
-    let currentPage = 1;
-    const quantities = {};
+const productsPerPage = 16;
+  let currentPage = 1;
+  const quantities = {};
 
-    function displayProducts(page) {
-      const start = (page - 1) * productsPerPage;
-      const end = start + productsPerPage;
-      const visibleProducts = products.slice(start, end);
+  function displayProducts(page) {
+    const start = (page - 1) * productsPerPage;
+    const end = start + productsPerPage;
+    const visibleProducts = products.slice(start, end);
 
-      document.getElementById("products").innerHTML = visibleProducts.map(p => `
-        <div class="product">
-          <img src="${p.img}" alt="${p.name}">
-          <div><strong>${p.name}</strong></div>
-          <div style="color: green;">السعر: ${p.price} دج</div>
-          <div>الكمية في العلبة ${p.pack}</div>
-          <div>
-            عدد :
-            <input type="number" min="0" placeholder="0" id="qty-${p.id}" 
-              oninput="this.value = Math.max(0, this.value)" 
-              value="${quantities[p.id] || ''}">
-          </div>
+    document.getElementById("products").innerHTML = visibleProducts.map(p => `
+      <div class="product">
+        <img src="${p.img}" alt="${p.name}" style="width:100px; height:100px;">
+        <div><strong>${p.name}</strong></div>
+        <div style="color: green;">السعر: ${p.price} دج</div>
+        <div>الكمية في العلبة: ${p.pack}</div>
+        <div>
+          عدد :
+          <input type="number" min="0" placeholder="0" id="qty-${p.id}" 
+            oninput="this.value = Math.max(0, this.value)" 
+            value="${quantities[p.id] || ''}">
         </div>
-      `).join("");
+      </div>
+    `).join("");
 
-      visibleProducts.forEach(p => {
-        const input = document.getElementById(`qty-${p.id}`);
-        input.addEventListener('input', () => {
-          quantities[p.id] = input.value;
-          updateTotalPrice();
-        });
+    visibleProducts.forEach(p => {
+      const input = document.getElementById(`qty-${p.id}`);
+      input.addEventListener('input', () => {
+        quantities[p.id] = input.value;
+        updateTotalPrice();
       });
+    });
 
-      updateTotalPrice();
-    }
+    updateTotalPrice();
+  }
 
-    function updatePagination() {
-      const totalPages = Math.ceil(products.length / productsPerPage);
-      const container = document.getElementById("pagination");
-      container.innerHTML = "";
+  function updatePagination() {
+    const totalPages = Math.ceil(products.length / productsPerPage);
+    const container = document.getElementById("pagination");
+    container.innerHTML = "";
 
-      const prevBtn = document.createElement("button");
-      prevBtn.textContent = "السابق";
-      prevBtn.disabled = currentPage === 1;
-      prevBtn.onclick = () => { currentPage--; update(); };
+    const prevBtn = document.createElement("button");
+    prevBtn.textContent = "السابق";
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.onclick = () => { currentPage--; update(); };
 
-      const nextBtn = document.createElement("button");
-      nextBtn.textContent = "التالي";
-      nextBtn.disabled = currentPage === totalPages;
-      nextBtn.onclick = () => { currentPage++; update(); };
+    const nextBtn = document.createElement("button");
+    nextBtn.textContent = "التالي";
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.onclick = () => { currentPage++; update(); };
 
-      container.appendChild(prevBtn);
+    container.appendChild(prevBtn);
 
-      for (let i = 1; i <= totalPages; i++) {
-        if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
-          const pageBtn = document.createElement("button");
-          pageBtn.textContent = i;
-          pageBtn.onclick = () => { currentPage = i; update(); };
-          if (i === currentPage) pageBtn.style.backgroundColor = "lightgreen";
-          container.appendChild(pageBtn);
-        } else if ((i === 2 && currentPage > 3) || (i === totalPages - 1 && currentPage < totalPages - 2)) {
-          const dots = document.createElement("span");
-          dots.textContent = "...";
-          container.appendChild(dots);
-        }
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+        const pageBtn = document.createElement("button");
+        pageBtn.textContent = i;
+        pageBtn.onclick = () => { currentPage = i; update(); };
+        if (i === currentPage) pageBtn.style.backgroundColor = "lightgreen";
+        container.appendChild(pageBtn);
+      } else if ((i === 2 && currentPage > 3) || (i === totalPages - 1 && currentPage < totalPages - 2)) {
+        const dots = document.createElement("span");
+        dots.textContent = "...";
+        container.appendChild(dots);
       }
-
-      container.appendChild(nextBtn);
     }
 
-    function update() {
-      displayProducts(currentPage);
-      updatePagination();
+    container.appendChild(nextBtn);
+  }
+
+  function update() {
+    displayProducts(currentPage);
+    updatePagination();
+  }
+
+  function updateTotalPrice() {
+    let total = 0;
+    for (const id in quantities) {
+      const qty = parseInt(quantities[id]) || 0;
+      const product = products.find(p => p.id == id);
+      if (product) total += qty * product.price;
+    }
+    document.getElementById("totalPrice").textContent = `المبلغ الإجمالي: ${total} دج`;
+  }
+
+  function sendOrder() {
+    const note = document.getElementById("note").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+
+    if (!address || !phone) {
+      alert("يرجى إدخال العنوان ورقم الهاتف.");
+      return;
     }
 
-    function updateTotalPrice() {
-      let total = 0;
-      for (const id in quantities) {
-        const qty = parseInt(quantities[id]) || 0;
+    let message = `طلب جديد:\n`;
+    for (const id in quantities) {
+      const qty = parseInt(quantities[id]);
+      if (qty > 0) {
         const product = products.find(p => p.id == id);
-        if (product) total += qty * product.price;
+        message += `- ${product.name} × ${qty} = ${qty * product.price} دج\n`;
       }
-      document.getElementById("totalPrice").textContent = `المبلغ الإجمالي: ${total} دج`;
-      updateCartCount();
     }
 
-    function updateCartCount() {
-      let count = 0;
-      for (const id in quantities) {
-        count += parseInt(quantities[id]) || 0;
-      }
-      document.getElementById("cartCount").textContent = count;
-    }
+    message += `\nالمجموع: ${document.getElementById("totalPrice").textContent.replace("المبلغ الإجمالي: ", "")}`;
+    message += `\nالعنوان: ${address}\nرقم الهاتف: ${phone}`;
+    if (note) message += `\nملاحظة: ${note}`;
 
-    function toggleCartPopup() {
-      const popup = document.getElementById("cartPopup");
-      const list = document.getElementById("cartDetails");
-      list.innerHTML = "";
-
-      let hasItems = false;
-      for (const id in quantities) {
-        const qty = parseInt(quantities[id]);
-        if (qty > 0) {
-          const product = products.find(p => p.id == id);
-          const li = document.createElement("li");
-          li.textContent = `${product.name} × ${qty} = ${qty * product.price} دج`;
-          list.appendChild(li);
-          hasItems = true;
-        }
-      }
-
-      if (!hasItems) list.innerHTML = "<li>السلة فارغة.</li>";
-      popup.style.display = popup.style.display === "block" ? "none" : "block";
-    }
-
-    function sendOrder() {
-      const note = document.getElementById("note").value.trim();
-      const address = document.getElementById("address").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-
-      if (!address || !phone) {
-        alert("يرجى إدخال العنوان ورقم الهاتف.");
-        return;
-      }
-
-      let message = `طلب جديد:\n`;
-      for (const id in quantities) {
-        const qty = parseInt(quantities[id]);
-        if (qty > 0) {
-          const product = products.find(p => p.id == id);
-          message += `- ${product.name} × ${qty} = ${qty * product.price} دج\n`;
-        }
-      }
-
-      message += `\nالمجموع: ${document.getElementById("totalPrice").textContent.replace("المبلغ الإجمالي: ", "")}`;
-      message += `\nالعنوان: ${address}\nرقم الهاتف: ${phone}`;
-      if (note) message += `\nملاحظة: ${note}`;
-
+// طلب الموقع
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      const mapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
+      message += `\nموقعي: ${mapsLink}`;
       const encodedMsg = encodeURIComponent(message);
-      window.open(`https://wa.me/${phoneNumber}?text=${encodedMsg}`, "_blank");
+      window.open(`https://wa.me/0540667186?text=${encodedMsg}`, "_blank");
+    },
+    (error) => {
+      // إذا رفض مشاركة الموقع أو حدث خطأ
+      const encodedMsg = encodeURIComponent(message);
+      window.open(`https://wa.me/0540667186?text=${encodedMsg}`, "_blank");
     }
+  );
+} else {
+  // المتصفح لا يدعم GPS
+  const encodedMsg = encodeURIComponent(message);
+  window.open(`https://wa.me/0540667186?text=${encodedMsg}`, "_blank");
+}
+  }
 
-    update();
-  </script>
+  update();
+</script>
+
 <footer style="width: 90%; background: #f2f2f2; text-align: center; padding: 10px; font-weight: bold; margin-top: 50px;">
   اتصل بنا: <a href="tel:0540667186" style="color: blue; text-decoration: none;">0540667186</a>
 </footer>
+
 </body>
 </html>
