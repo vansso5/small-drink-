@@ -90,7 +90,7 @@
 }
 
     input[type="number"] {
-  width: 60px;
+  width: 40px;
   padding: 5px;
   border: 2px solid #ccc;
   border-radius: 8px;
@@ -231,6 +231,13 @@ input[type="number"]:focus {
 
   <div class="form-container">
     <textarea id="note" placeholder="ملاحظة (اختياري)"></textarea>
+   <script>
+  const textarea = document.querySelector("textarea");
+  textarea.addEventListener("input", () => {
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
+  });
+</script>
     <input type="text" id="address" placeholder="العنوان (إجباري)" required>
     <input type="tel" id="phone" placeholder="رقم الهاتف (إجباري)" required>
     <button onclick="sendOrder()">
