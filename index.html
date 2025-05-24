@@ -90,12 +90,21 @@
 }
 
     input[type="number"] {
-      width: 60px;
-      margin-top: 5px;
-      background-color: #fff8c4;
-      border: 1px solid #ccc;
-      text-align: center;
-    }
+  width: 60px;
+  padding: 5px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+input[type="number"]:focus {
+  border-color: #4CAF50;
+  background-color: #ffffff;
+  outline: none;
+}
 
     .form-container {
       margin-top: 30px;
@@ -251,8 +260,6 @@
   { id: 6, name: "candia 20 cl", price: 820, pack: 18, img: "https://i.postimg.cc/kX215Mgt/images-18.jpg" },
   { id: 7, name: "coca bouteille 30 cl", price: 580, pack: 12, img: "https://i.postimg.cc/MGHn0P3c/Coca-Cola-30-cl.jpg" },
   { id: 8, name: "coca canette", price: 1430, pack: 24, img: "https://i.postimg.cc/nz7cT64L/coca-cola-original-canette-format-slim-33-cl-lot-24-72255-00-J.jpg" },
-  { id: 9, name: "flash smaili", price: 500, pack: 156, img: "https://i.postimg.cc/zDc0T6dh/img-1-1746304040475.jpg" },
-  { id: 10, name: "flash smurf", price: 550, pack: 180, img: "https://i.postimg.cc/k5LW2PMM/img-2-1746470252315.jpg" },
   { id: 11, name: "hamoud canette 24 cl", price: 280, pack: 6, img: "https://i.postimg.cc/dtSQrLhy/Hamoud-Boualem-0-33-L-Canettes.jpg" },
   { id: 12, name: "ifri 0.5 L", price: 200, pack: 12, img: "https://i.postimg.cc/WbDFJfKh/Ifri-Eau-Minerales-0-5-L.jpg" },
   { id: 13, name: "ifri vichi arome 33 cl", price: 360, pack: 12, img: "https://i.postimg.cc/JhyMp9Nk/images-1.jpg" },
@@ -287,7 +294,9 @@
   { id: 42, name: "vichi tazedj arom citron", price: 260, pack: 8, img: "https://i.postimg.cc/2602yF3M/IMG-20250510-110714.jpg" },
   { id: 43, name: "izem 33 cl fruits rouges", price: 710, pack: 12, img: "https://i.postimg.cc/cHKB1KtB/IMG-20250510-104818.jpg" },
   { id: 44, name: "Orangina 33 cl", price: 480, pack: 12, img: "https://i.postimg.cc/Fz9cz5Hy/orangina-bouteille-plastique-de-50-cl.jpg" },
-  { id: 45, name: "rouiba excellence 25 cl", price: 660, pack: 12, img: "https://i.postimg.cc/wTry8sLc/Rouiba-Excellences-100-Naturel-0-25-L.jpg" }
+  { id: 45, name: "rouiba excellence 25 cl", price: 660, pack: 12, img: "https://i.postimg.cc/wTry8sLc/Rouiba-Excellences-100-Naturel-0-25-L.jpg" },
+    { id: 9, name: "flash smaili", price: 500, pack: 156, img: "https://i.postimg.cc/zDc0T6dh/img-1-1746304040475.jpg" },
+  { id: 10, name: "flash smurf", price: 550, pack: 180, img: "https://i.postimg.cc/k5LW2PMM/img-2-1746470252315.jpg" },
     ];
 
     const productsPerPage = 16;
