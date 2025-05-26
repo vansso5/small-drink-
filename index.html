@@ -240,11 +240,7 @@ input[type="number"]:focus {
 </script>
     <input type="text" id="address" placeholder="العنوان (إجباري)" required>
     <input type="tel" id="phone" placeholder="رقم الهاتف (إجباري)" required>
-    <button onclick="sendOrder()">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="واتساب">
-  طلب عبر واتساب
-</button>
-  </div>
+    
 
   <div class="cart-icon" onclick="toggleCartPopup()">
     🛒
@@ -306,9 +302,10 @@ input[type="number"]:focus {
   { id: 10, name: "flash smurf", price: 550, pack: 180, img: "https://i.postimg.cc/k5LW2PMM/img-2-1746470252315.jpg" },
     ];
 
-    const productsPerPage = 16;
+const productsPerPage = 16;
     let currentPage = 1;
     const quantities = {};
+    let userLocation = "";
 
     function displayProducts(page) {
       const start = (page - 1) * productsPerPage;
@@ -420,6 +417,21 @@ input[type="number"]:focus {
       popup.style.display = popup.style.display === "block" ? "none" : "block";
     }
 
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          userLocation = `https://www.google.com/maps?q=${lat},${lng}`;
+          alert("تم تحديد موقعك بنجاح!");
+        }, function(error) {
+          alert("فشل في تحديد الموقع. تأكد من تفعيل GPS.");
+        });
+      } else {
+        alert("المتصفح لا يدعم تحديد الموقع.");
+      }
+    }
+
     function sendOrder() {
       const note = document.getElementById("note").value.trim();
       const address = document.getElementById("address").value.trim();
@@ -442,14 +454,23 @@ input[type="number"]:focus {
       message += `\nالمجموع: ${document.getElementById("totalPrice").textContent.replace("المبلغ الإجمالي: ", "")}`;
       message += `\nالعنوان: ${address}\nرقم الهاتف: ${phone}`;
       if (note) message += `\nملاحظة: ${note}`;
+      if (userLocation) message += `\nالموقع: ${userLocation}`;
 
       const encodedMsg = encodeURIComponent(message);
       window.open(`https://wa.me/${phoneNumber}?text=${encodedMsg}`, "_blank");
     }
 
     update();
-    
   </script>
+
+  <div style="text-align: center; margin: 10px;">
+    <button onclick="getLocation()" style="padding: 10px; font-weight: bold; background: #007BFF; border: 1px solid #1E90FF;">تحديد موقعي</button>
+  </div>
+<button onclick="sendOrder()">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="واتساب">
+  طلب عبر واتساب
+</button>
+  </div>
   <footer style="width: 90%; background: #f2f2f2; text-align: center; padding: 10px; font-weight: bold; margin-top: 50px;">
   اتصل بنا: <a href="tel:0540667186" style="color: blue; text-decoration: none;">0540667186</a>
 </footer>
