@@ -30,7 +30,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin: 10px;
   padding: 15px;
-  width: 175px;
+  width: 165px;
   max-width: 100%;
   box-sizing: border-box;
   transition: transform 0.3s ease;
@@ -71,7 +71,7 @@
     }
 
     .pagination button {
-  width: 35px;
+  width: 50px;
   height: 35px;
   border-radius: 50%;
   border: 1px solid #ccc;
@@ -464,15 +464,19 @@ const productsPerPage = 16;
   </script>
 
   <div style="text-align: center; margin: 10px;">
-    <button onclick="getLocation()" style="padding: 10px; font-weight: bold; background: #007BFF; border: 1px solid #1E90FF;">تحديد موقعي</button>
-  </div>
+  <button onclick="getLocation()" style="padding: 10px; font-weight: bold; background: #007BFF; border: 1px solid #1E90FF; color: white; display: inline-flex; align-items: center; direction: rtl;">
+    <span style="margin-left: 6px;">📍</span> تحديد موقعي
+  </button>
+</div>
 <button onclick="sendOrder()">
   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="واتساب">
   طلب عبر واتساب
 </button>
   </div>
   <footer style="width: 90%; background: #f2f2f2; text-align: center; padding: 10px; font-weight: bold; margin-top: 50px;">
-  اتصل بنا: <a href="tel:0540667186" style="color: blue; text-decoration: none;">0540667186</a>
+ <p>ايضا يمكنكم الاتصال بنا<br>
+  <a href="tel:0540667186" style="color: blue; text-decoration: none;">0540667186</a>
+</p>
 </footer>
 </body>
 </html>
