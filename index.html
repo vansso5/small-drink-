@@ -24,8 +24,8 @@
   box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
 }
 
-    .product {
-  background-color: #fff;
+.product {
+  background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin: 10px;
@@ -35,7 +35,12 @@
   box-sizing: border-box;
   transition: transform 0.3s ease;
   text-align: center;
-    }
+}
+
+.product:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
 .product:hover {
   transform: translateY(-5px);
 }
@@ -490,14 +495,30 @@ window.scrollTo({ top: 0, behavior: 'smooth' });
 
     update();
   </script>
-  <div style="text-align: center; margin: 10px;">
-  <button onclick="getLocation()" style="padding: 10px; font-weight: cairo; background: deepskyblue; border: 1px solid deepskyblue; color: white; display: inline-flex; align-items: center; direction: rtl;">
-    <span style="margin-left: 6px;">📍</span> تحديد موقعي
+  <div style="display: flex; justify-content: center; margin: 10px;">
+  <button onclick="getLocation()" style="
+    width: 160px;
+    height: 50px;
+    background-image: url('https://i.postimg.cc/PxTLthxd/images.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid green; /* ← هذا الإطار الأخضر */
+    color: white;
+    font-size: 16px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    text-shadow: 0 0 3px rgba(0,0,0,0.7);
+  ">
   </button>
-  <p style="font-size: 12px; color: #555; margin-top: 4px;">
-  الرجاء الضغط على الزر الأزرق لتحديد موقعك قبل الطلب
-</p>
 </div>
+<p style="font-size: 12px; color: #555; text-align: center; margin-top: 4px;">
+  الرجاء الضغط على الزر Google Maps لتحديد موقعك قبل الطلب
+</p>
 <button onclick="sendOrder()">
   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="واتساب">
   طلب عبر واتساب
@@ -506,11 +527,23 @@ window.scrollTo({ top: 0, behavior: 'smooth' });
   <footer style="width: 90%; background: #f2f2f2; text-align: center; padding: 10px; font-weight: bold; margin-top: 50px;">
   <style>
   .footer-contact {
-    font-size: 12px;
-    font-weight: 300;
-    color: #666;
-    margin: 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: #666;
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: transparent !important;
+  background: transparent !important;
+}
+.footer-contact a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 13px;
+}
+.footer-contact a:hover {
+  text-decoration: underline;
+}
   }
   .footer-contact a {
     color: #007bff;
@@ -523,13 +556,14 @@ window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </style>
 
-<p class="footer-contact">
-   أيضًا يمكنكم الاتصال بنا على 📞<br />
+<p class="footer-contact" style="background: none; display: inline-block;">
+  أيضًا يمكنكم الاتصال بنا على 📞<br />
   <a href="tel:0540667186">0540667186</a>
-</p> 
+</p>
 </footer>
 </body>
 <footer style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: seagreen; letter-spacing: 3px; text-transform: uppercase; opacity: 0.9; text-align: center; padding: 20px;">
-  SMALL DRINKS
+  SMALL DRINKS distribution 
+  <div style="width: 140px; height: 1px; background-color: seagreen; margin: 2px auto 0 auto;"></div>
 </footer>
 </html>
