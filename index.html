@@ -339,7 +339,7 @@ const productsPerPage = 16;
     let currentPage = 1;
     const quantities = {};
     let userLocation = "";
-
+let locationSelected = false;
     function displayProducts(page) {
       const start = (page - 1) * productsPerPage;
       const end = start + productsPerPage;
@@ -451,21 +451,25 @@ window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          const lat = position.coords.latitude;
-          const lng = position.coords.longitude;
-          userLocation = `https://www.google.com/maps?q=${lat},${lng}`;
-          alert("تم تحديد موقعك بنجاح!");
-        }, function(error) {
-          alert("فشل في تحديد الموقع. تأكد من تفعيل GPS.");
-        });
-      } else {
-        alert("المتصفح لا يدعم تحديد الموقع.");
-      }
-    }
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      userLocation = `https://maps.google.com/?q=${position.coords.latitude},${position.coords.longitude}`;
+      locationSelected = true;
+      document.getElementById("orderBtn").disabled = false;
+      alert("تم تحديد موقعك بنجاح.");
+    }, function(error) {
+      alert("حدث خطأ أثناء تحديد الموقع.");
+    });
+  } else {
+    alert("المتصفح لا يدعم تحديد الموقع.");
+  }
+}
 
     function sendOrder() {
+      if (!locationSelected) {
+  alert("الرجاء الضغط أولا على زر تحديد الموقع.");
+  return;
+}
       const note = document.getElementById("note").value.trim();
       const address = document.getElementById("address").value.trim();
       const phone = document.getElementById("phone").value.trim();
@@ -519,7 +523,7 @@ window.scrollTo({ top: 0, behavior: 'smooth' });
 <p style="font-size: 12px; color: #555; text-align: center; margin-top: 4px;">
   الرجاء الضغط على الزر Google Maps لتحديد موقعك قبل الطلب
 </p>
-<button onclick="sendOrder()">
+<button id="orderBtn" onclick="sendOrder()">
   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="واتساب">
   طلب عبر واتساب
 </button>
