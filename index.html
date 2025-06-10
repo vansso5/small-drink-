@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>متجر المشروبات</title>
+  <link rel="manifest" href="manifest.json">
   <style>
     body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -339,7 +340,7 @@ const productsPerPage = 16;
     let currentPage = 1;
     const quantities = {};
     let userLocation = "";
-let locationSelected = false;
+
     function displayProducts(page) {
       const start = (page - 1) * productsPerPage;
       const end = start + productsPerPage;
@@ -451,25 +452,21 @@ window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      userLocation = `https://maps.google.com/?q=${position.coords.latitude},${position.coords.longitude}`;
-      locationSelected = true;
-      document.getElementById("orderBtn").disabled = false;
-      alert("تم تحديد موقعك بنجاح.");
-    }, function(error) {
-      alert("حدث خطأ أثناء تحديد الموقع.");
-    });
-  } else {
-    alert("المتصفح لا يدعم تحديد الموقع.");
-  }
-}
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          userLocation = `https://www.google.com/maps?q=${lat},${lng}`;
+          alert("تم تحديد موقعك بنجاح!");
+        }, function(error) {
+          alert("فشل في تحديد الموقع. تأكد من تفعيل GPS.");
+        });
+      } else {
+        alert("المتصفح لا يدعم تحديد الموقع.");
+      }
+    }
 
-     function sendOrder() {
-      if (!locationSelected) {
-  alert("الرجاء الضغط أولا على زر Google Maps.");
-  return;
-}
+    function sendOrder() {
       const note = document.getElementById("note").value.trim();
       const address = document.getElementById("address").value.trim();
       const phone = document.getElementById("phone").value.trim();
@@ -498,15 +495,15 @@ window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     update();
-  </script>
-  <div style="display: flex; justify-content: center; margin: 10px;">
+</script>
+<div style="display: flex; justify-content: center; margin: 10px;">
   <button onclick="getLocation()" style="
     width: 160px;
     height: 50px;
     background-image: url('https://i.postimg.cc/PxTLthxd/images.png');
     background-size: cover;
     background-position: center;
-    border: 2px solid green; /* ← هذا الإطار الأخضر */
+    border: 2px solid green;
     color: white;
     font-size: 16px;
     font-family: 'Cairo', sans-serif;
@@ -523,51 +520,43 @@ window.scrollTo({ top: 0, behavior: 'smooth' });
 <p style="font-size: 12px; color: #555; text-align: center; margin-top: 4px;">
   الرجاء الضغط على الزر Google Maps لتحديد موقعك قبل الطلب
 </p>
-<button id="orderBtn" onclick="sendOrder()">
+<button onclick="sendOrder()">
   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="واتساب">
   طلب عبر واتساب
 </button>
-  </div>
-  <footer style="width: 90%; background: #f2f2f2; text-align: center; padding: 10px; font-weight: bold; margin-top: 50px;">
-  <style>
-  .footer-contact {
-  font-size: 12px;
-  font-weight: 300;
-  color: #666;
-  margin: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: transparent !important;
-  background: transparent !important;
-}
-.footer-contact a {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 13px;
-}
-.footer-contact a:hover {
-  text-decoration: underline;
-}
-  }
-  .footer-contact a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 13px;
-  }
-  .footer-contact a:hover {
-    text-decoration: underline;
-  }
-</style>
+</div>
 
-<p class="footer-contact" style="background: none; display: inline-block;">
-  أيضًا يمكنكم الاتصال بنا على 📞<br />
-  <a href="tel:0540667186">0540667186</a>
-</p>
+<footer style="width: 90%; background: #f2f2f2; text-align: center; padding: 10px; font-weight: bold; margin-top: 50px;">
+  <style>
+    .footer-contact {
+      font-size: 12px;
+      font-weight: 300;
+      color: #666;
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: transparent !important;
+      background: transparent !important;
+    }
+    .footer-contact a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 13px;
+    }
+    .footer-contact a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  <p class="footer-contact" style="background: none; display: inline-block;">
+    أيضًا يمكنكم الاتصال بنا على 📞<br />
+    <a href="tel:0540667186">0540667186</a>
+  </p>
 </footer>
 </body>
 <footer style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: seagreen; letter-spacing: 3px; text-transform: uppercase; opacity: 0.9; text-align: center; padding: 20px;">
   SMALL DRINKS distribution 
   <div style="width: 140px; height: 1px; background-color: seagreen; margin: 2px auto 0 auto;"></div>
 </footer>
-</html>
+  </button>
+</div>
