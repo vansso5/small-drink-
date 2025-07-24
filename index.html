@@ -288,12 +288,13 @@ input[type="number"]:focus {
     const products = [
   { id: 1, name: "ariaf 0.5 L", price: 185, pack: 12, img: "https://i.postimg.cc/vTFRv1Bk/images-17.jpg" },
   { id: 2, name: "azro pack 6", price: 440, pack: 6, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGjgTUnWV8twl-jINHkTu6EJeprxEO0AICLZ-1ci95ak5Rtwhw0ZkEe0_z&s=10" },
-  { id: 3, name: "bifa 20 cl", price: 520, pack: 30, img: "https://i.postimg.cc/GpXhzjwN/4225.jpg" },
+  { id: 3, name: "bifa 20 cl", price: 525, pack: 30, img: "https://i.postimg.cc/GpXhzjwN/4225.jpg" },
   { id: 4, name: "bifa joy 12.5 cl", price: 430, pack: 48, img: "https://i.postimg.cc/K8FMHQwv/144230829095747170.jpg" },
   { id: 5, name: "candia 12.5 cl", price: 560, pack: 18, img: "https://i.postimg.cc/Prvyj6SW/Candia-Candy-Choco-125-ML.jpg" },
   { id: 6, name: "candia 20 cl", price: 820, pack: 18, img: "https://i.postimg.cc/kX215Mgt/images-18.jpg" },
   { id: 7, name: "coca bouteille 30 cl", price: 580, pack: 12, img: "https://i.postimg.cc/MGHn0P3c/Coca-Cola-30-cl.jpg" },
-  { id: 8, name: "coca canette", price: 1430, pack: 24, img: "https://i.postimg.cc/nz7cT64L/coca-cola-original-canette-format-slim-33-cl-lot-24-72255-00-J.jpg" },
+  { id: 70, name: "coca bouteille 25 cl", price: 410, pack: 12, img: "https://i.postimg.cc/SKZjZKVQ/images-3.jpg" },
+  { id: 8, name: "coca canette", price: 1460, pack: 24, img: "https://i.postimg.cc/nz7cT64L/coca-cola-original-canette-format-slim-33-cl-lot-24-72255-00-J.jpg" },
   { id: 11, name: "hamoud canette 24 cl", price: 280, pack: 6, img: "https://i.postimg.cc/dtSQrLhy/Hamoud-Boualem-0-33-L-Canettes.jpg" },
   { id: 12, name: "ifri 0.5 L", price: 200, pack: 12, img: "https://i.postimg.cc/WbDFJfKh/Ifri-Eau-Minerales-0-5-L.jpg" },
   { id: 13, name: "ifri vichi arome 33 cl", price: 360, pack: 12, img: "https://i.postimg.cc/JhyMp9Nk/images-1.jpg" },
@@ -305,7 +306,7 @@ input[type="number"]:focus {
   { id: 18, name: "ifruit au lait pack 33 cl", price: 700, pack: 12, img: "https://i.postimg.cc/Y0ZVqKSh/Photo00001037.jpg" },
   { id: 19, name: "izem bouteille 33 cl", price: 620, pack: 12, img: "https://i.postimg.cc/B6p3b4sR/Photo00001002.jpg" },
   { id: 43, name: "izem 33 cl fruits rouges", price: 720, pack: 12, img: "https://i.postimg.cc/cHKB1KtB/IMG-20250510-104818.jpg" },
-  { id: 20, name: "izem canette", price: 430, pack: 6, img: "https://i.postimg.cc/6pS6d9kZ/Photo00001040.jpg" },
+  { id: 20, name: "izem canette", price: 420, pack: 6, img: "https://i.postimg.cc/6pS6d9kZ/Photo00001040.jpg" },
   { id: 21, name: "izem canette 0.5 L", price: 750, pack: 6, img: "https://i.postimg.cc/dVL2jk4P/img-1-1746912952166.jpg" },
   { id: 22, name: "luxe d'orge", price: 1700, pack: 24, img: "https://i.postimg.cc/g2hQTmw8/images-19.jpg" },
   { id: 23, name: "manbaa 0.5 L", price: 185, pack: 12, img: "https://i.postimg.cc/cJshBSfs/images-20.jpg" },
@@ -321,7 +322,7 @@ input[type="number"]:focus {
   { id: 33, name: "rouiba 20 cl", price: 580, pack: 27, img: "https://i.postimg.cc/HkHWzZnY/images.jpg" },
   { id: 34, name: "Schweppes bouteille 30 cl", price: 620, pack: 12, img: "https://i.postimg.cc/ZR9JnX7c/images-16.jpg" },
   { id: 35, name: "Schweppes canette", price: 400, pack: 6, img: "https://i.postimg.cc/cJrpBwR1/055393-d1.jpg" },
-  { id: 36, name: "Schweppes gold canette", price: 440, pack: 6, img: "https://i.postimg.cc/ZYr1HTdN/Remove-bg-ai-1710274534220.png" },
+  { id: 36, name: "Schweppes gold canette", price: 460, pack: 6, img: "https://i.postimg.cc/ZYr1HTdN/Remove-bg-ai-1710274534220.png" },
   { id: 9, name: "Pepsi 33 cl", price: 415, pack: 12, img: "https://i.postimg.cc/xCF85MHj/pepsi-300ml.jpg" },
   { id: 99, name: "Miranda 33 cl", price: 415, pack: 12, img: "https://i.postimg.cc/gj8w0rXY/Mirinda-33ml.jpg" },
   { id: 91, name: "Fanta 30 cl", price: 500, pack: 12, img: "https://i.postimg.cc/NMrFNLx1/631909.png" },
@@ -549,15 +550,4 @@ window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </style>
 
-  <p class="footer-contact" style="background: none; display: inline-block;">
-  أيضًا يمكنكم الاتصال بنا على
-  <a href="tel:+213540667186">0540667186</a>
-  </p>
-</footer>
-</body>
-<footer style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: seagreen; letter-spacing: 3px; text-transform: uppercase; opacity: 0.9; text-align: center; padding: 20px;">
-  SMALL DRINKS distribution 
-  <div style="width: 140px; height: 1px; background-color: seagreen; margin: 2px auto 0 auto;"></div>
-</footer>
-  </button>
-</div>
+  <p class="foo
